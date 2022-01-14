@@ -1,6 +1,7 @@
 .header{
     margin: 45px auto 0;
-    width: 800px;
+    width: 880px;
     height: 74px;
     position: relative;
+    border-bottom: 1px solid #545454;
 }
