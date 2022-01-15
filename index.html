@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="./pages/index.css">
+    <script src="./scripts/script.js" defer></script>
     <title>Project 4 Homework</title>
 </head>
 
@@ -15,24 +16,63 @@
     </header>
 
     <main class="main">
-        <section class="marker profile">
+        <section class="profile">
             <img class="profile__avatar" src="./img/kusto.jpg" alt="Your foto, username">
-            <div class="marker profile__info">
-                <h1 class="profile__name">Jacques Cousteau</h1>
-                <button class="profile__edit">🖉</button>
-                <p class="profile__occupation">Explorer</p>
+            <h1 class="profile__name">Jacques Cousteau</h1>
+            <button class="profile__edit" id="profile__edit">🖉</button>
+            <p class="profile__occupation">Explorer</p>
+            <div class="profile__add">+</div>
+        </section>
+
+        <section class="elements">
+            <div class="element">
+                <img class="element__image" src="./img/01yosemite.jpg" alt="Yosemite Valley" />
+                <h2 class="element__name">Yosemite Valley</h2>
+                <button type="button" id="like-1" class="element__like"></button>
             </div>
-            <div class="profile__add">
-                +
+            <div class="element">
+                <img class="element__image" src="./img/02louise.png" alt="Lake Louise" />
+                <h2 class="element__name">Lake Louise</h2>
+                <button type="button" id="like-2" class="element__like"></button>
+            </div>
+            <div class="element">
+                <img class="element__image" src="./img/03bald.png" alt="Bald Mountains" />
+                <h2 class="element__name">Bald Mountains</h2>
+                <button type="button" id="like-3" class="element__like"></button>
+            </div>
+            <div class="element">
+                <img class="element__image" src="./img/04latemar.png" alt="Latemar" />
+                <h2 class="element__name">Latemar</h2>
+                <button type="button" id="like-4" class="element__like"></button>
+            </div>
+            <div class="element">
+                <img class="element__image" src="./img/05vanoise.png" alt="Vanoise Nationa..." />
+                <h2 class="element__name">Vanoise Nationa...</h2>
+                <button type="button" id="like-5" class="element__like"></button>
+            </div>
+            <div class="element">
+                <img class="element__image" src="./img/05vanoise.png" alt="Lago di Braies" />
+                <h2 class="element__name">Lago di Braies</h2>
+                <button type="button" id="like-6" class="element__like"></button>
             </div>
         </section>
-        <section class="marker elements">
 
+        <section class="popup">
+            <div class="popup__form">
+                <button type="button" id="close" class="popup__close"></button>
+                <h2 class="popup__title">Edit profile</h2>
+                <form name="form">
+                    <input class="popup__input" type="text" name="name" id="name" placeholder="name" />
+                    <input class="popup__input" type="text" name="occupation" id="occupation"
+                        placeholder="occupation" />
+                    <button type="submit" id="submitButton" class="popup__submit">Save</button>
+                </form>
+            </div>
         </section>
 
     </main>
 
-    <footer class="marker footer">
+    <footer class="footer">
         <p class="footer__paragraph">© 2021 Around The U.S.</p>
     </footer>
 

@@ -1,0 +1,26 @@
+.popup__close{
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    float: right;
+    transform: translate(calc(100% + 4px),calc(-100% - 4px));
+    background: url(../../../img/Close_Icon.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    border: none;
+    opacity: 1;
+    transition-property: opacity;
+    transition-timing-function: ease-in;
+    transition-duration: 0.3s;
+    cursor: pointer;
+  }
+  .popup__close:hover{
+    opacity: 0.6;
+  }
+  @media (max-width: 550px){
+    .popup__close{
+      width: 26px;
+      height: 26px;
+      transform: translate(-4px, calc(-100% - 20px));
+    }
+  }
