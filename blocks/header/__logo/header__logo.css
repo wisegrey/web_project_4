@@ -1,28 +1,18 @@
 .header__logo{
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 173px;
     height: 33px;
 }
 
-/* .header__logo{
-    width: 173px;
-    height: 33px;
-    background: url(../../../images/header-logo_1280px.svg);
-    background-repeat: no-repeat;
-    margin: 45px auto 0 0;
-  }
-  @media (max-width: 600px){
+/* @media screen and (max-width: 768px){
     .header__logo{
-      margin: 28px auto 0 35px;
+        margin-left: 27px;
     }
-  }
-  @media (max-width: 400px){
+} */
+
+@media screen and (max-width: 435px){
     .header__logo{
-      background: url(../../../images/header-logo_320px.svg);
-      width: 126px;
-      height: 24px;
-      margin-left: 27px;
+        margin-left: 27px;
+        width: 126px;
+        height: 24px;
     }
-  } */
+}

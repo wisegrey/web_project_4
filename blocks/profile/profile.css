@@ -16,7 +16,7 @@
       }
 }
 
-@media (max-width: 768px){
+@media (max-width: 808px){
     .profile{
       max-width: calc(320px - 19px * 2);
       justify-content: center;

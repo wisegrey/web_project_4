@@ -1,9 +1,10 @@
 // Let's find the form in the DOM
-let formElement = document.querySelector(".popup");   
+let popupElement = document.querySelector(".popup");
+let formElement = document.querySelector(".popup__form");
 let nameForPlaceholder = document.querySelector(".profile__name");
 let occupationForPlaceholder = document.querySelector(".profile__occupation");
 let editButton = document.querySelector("#profile__edit");
-let closeButton = document.querySelector("#close");
+let closeButton = popupElement.querySelector("#close");
 let submitButton = document.querySelector("#submitButton");
 let nameInput = document.querySelector("#name");  
 let jobInput = document.querySelector("#occupation");
@@ -11,11 +12,11 @@ let jobInput = document.querySelector("#occupation");
 // Next is the form submit handler, though
 // it won't submit anywhere just yet
 function toggleForm(){
-    if (!formElement.classList.contains("popup__opened")){
+    if (!popupElement.classList.contains("popup__opened")){
          nameInput.value = nameForPlaceholder.textContent;
          jobInput.value = occupationForPlaceholder.textContent;
        }
-    formElement.classList.toggle("popup__opened");
+    popupElement.classList.toggle("popup__opened");
 }
 
 // Note that the function name starts with a verb

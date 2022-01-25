@@ -9,3 +9,7 @@ Used technologies:
 - HTML
 - css
 - JavaScript
+
+### Link to project page
+
+[Web Project 4](https://wisegrey.github.io/web_project_4/)
