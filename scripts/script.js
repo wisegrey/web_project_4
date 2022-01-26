@@ -12,11 +12,11 @@ let jobInput = document.querySelector("#occupation");
 // Next is the form submit handler, though
 // it won't submit anywhere just yet
 function toggleForm(){
-    if (!popupElement.classList.contains("popup__opened")){
+    if (!popupElement.classList.contains("popup_opened")){
          nameInput.value = nameForPlaceholder.textContent;
          jobInput.value = occupationForPlaceholder.textContent;
        }
-    popupElement.classList.toggle("popup__opened");
+    popupElement.classList.toggle("popup_opened");
 }
 
 // Note that the function name starts with a verb
