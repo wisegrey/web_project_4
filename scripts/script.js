@@ -1,6 +1,6 @@
 // Let's find the form in the DOM
-const popupEditElement = document.querySelector(".popup__edit");
-const popupAddElement = document.querySelector(".popup__add");
+const popupEditElement = document.querySelector("#popup__edit");
+const popupAddElement = document.querySelector("#popup__add");
 const formElement = document.querySelector(".popup__form");
 const nameForPlaceholder = document.querySelector(".profile__name");
 const occupationForPlaceholder = document.querySelector(".profile__occupation");
@@ -12,7 +12,7 @@ const submitCardButton = document.querySelector("#addCardForm");
 const nameInput = document.querySelector("#name");
 const jobInput = document.querySelector("#occupation");
 
-const imagePopup = document.querySelector(".popup__pic");
+const imagePopup = document.querySelector("#popup__pic");
 const cardsContainer = document.querySelector(".elements");
 const newCardTemplate = document.querySelector("#newCardTemplate").content;
 
