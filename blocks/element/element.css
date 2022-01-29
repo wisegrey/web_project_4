@@ -1,17 +1,9 @@
-.element{
-    display: grid;
-    width: 282px;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+.element {
+    max-width: 282px;
+    background-color: #ffffff;
     border-radius: 10px;
-    background-color: white;
-    color: #000000;
     overflow: hidden;
-    grid-template-rows: repeat(2, min-content);
-    grid-template-columns: repeat(2, max-content);
-    gap: 0 0;
-    grid-template-areas:
-    "image image"
-    "name like"
-}
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }

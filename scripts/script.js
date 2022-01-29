@@ -12,13 +12,15 @@ let submitCardButton = document.querySelector("#addCardForm");
 let nameInput = document.querySelector("#name");
 let jobInput = document.querySelector("#occupation");
 
-let imagePopup = document.querySelector(".image-popup");
-let imagePopupBackground = imagePopup.querySelector(".image-popup__background");
-let imagePopupCloseBtn = imagePopup.querySelector(".image-popup__close");
+let imagePopup = document.querySelector(".popup__pic");
 let cardsContainer = document.querySelector(".elements");
 let newCardTemplate = document.querySelector("#newCardTemplate").content;
 
 let addCardButton = document.querySelector(".profile__add");
+
+let bigPicture = document.querySelector(".image-popup__picture");
+let bigPictureName = document.querySelector(".image-popup__name");
+let bigPictureClose = document.querySelector("#image-popup__close");
 
 const initialCards = [
   {
@@ -52,9 +54,14 @@ function createCard(name, image) {
   const newCard = newCardTemplate.querySelector(".element").cloneNode(true);
   const cardName = newCard.querySelector(".element__name");
   const cardImage = newCard.querySelector(".element__image");
+  const likeBtn = newCard.querySelector(".element__like");
+  const deleteBtn = newCard.querySelector(".element__delete");
   cardName.textContent = name;
   cardImage.src = image;
   cardImage.alt = name;
+  cardImage.addEventListener("click", fullScreenPic);
+  likeBtn.addEventListener("click", handleLikeButton);
+  deleteBtn.addEventListener("click", handleDeleteButton);
   return newCard;
 }
 
@@ -76,6 +83,7 @@ populateElements();
 //   popupElement.classList.toggle("popup_opened");
 // }
 
+// next 4 functions names speaks for iselfs =)
 function openEditForm() {
   nameInput.value = nameForPlaceholder.textContent;
   jobInput.value = occupationForPlaceholder.textContent;
@@ -102,6 +110,7 @@ function handleProfileFormSubmit(evt) {
   closeEditForm();
 }
 
+// function to add a single card from inputs in Add "new place"
 function handleCardSubmit(evt) {
   evt.preventDefault();
   const newName = document.querySelector("#title");
@@ -111,6 +120,30 @@ function handleCardSubmit(evt) {
   closeAddForm();
 }
 
+// to make like-heart icon chamge color after click =)
+function handleLikeButton(evt) {
+  evt.target.classList.toggle("element__like-active");
+}
+
+//obliviously this thing delete card
+function handleDeleteButton(evt) {
+  evt.target.closest(".element").remove();
+}
+
+//makes picture popup visible and gives URL for pic and text for description under the pic.
+function fullScreenPic(evt) {
+  const imageURL = evt.target.currentSrc;
+  const imageTitle = evt.target.alt;
+  bigPicture.src = imageURL;
+  bigPicture.alt = imageTitle;
+  bigPictureName.textContent = imageTitle;
+  imagePopup.classList.add("popup_opened");
+}
+
+// close/makes inviseble picture popup
+function closeFullScreenPic(){
+  imagePopup.classList.remove("popup_opened");
+}
 
 // event listeners
 formElement.addEventListener('submit', handleProfileFormSubmit);
@@ -119,6 +152,4 @@ closeEditPopupButton.addEventListener('click', closeEditForm);
 closeAddPopupButton.addEventListener('click', closeAddForm);
 addCardButton.addEventListener('click', openAddForm);
 submitCardButton.addEventListener('submit', handleCardSubmit);
-
-
-
+bigPictureClose.addEventListener('click', closeFullScreenPic);
