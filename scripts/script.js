@@ -1,26 +1,26 @@
 // Let's find the form in the DOM
-let popupEditElement = document.querySelector(".popup__edit");
-let popupAddElement = document.querySelector(".popup__add");
-let formElement = document.querySelector(".popup__form");
-let nameForPlaceholder = document.querySelector(".profile__name");
-let occupationForPlaceholder = document.querySelector(".profile__occupation");
-let editButton = document.querySelector("#profile__edit");
-let closeEditPopupButton = popupEditElement.querySelector("#close_edit_profile");
-let closeAddPopupButton = popupAddElement.querySelector("#close_add_card");
-let submitProfileButton = document.querySelector("#submitProfileButton");
-let submitCardButton = document.querySelector("#addCardForm");
-let nameInput = document.querySelector("#name");
-let jobInput = document.querySelector("#occupation");
+const popupEditElement = document.querySelector(".popup__edit");
+const popupAddElement = document.querySelector(".popup__add");
+const formElement = document.querySelector(".popup__form");
+const nameForPlaceholder = document.querySelector(".profile__name");
+const occupationForPlaceholder = document.querySelector(".profile__occupation");
+const editButton = document.querySelector("#profile__edit");
+const closeEditPopupButton = popupEditElement.querySelector("#close_edit_profile");
+const closeAddPopupButton = popupAddElement.querySelector("#close_add_card");
+const submitProfileButton = document.querySelector("#submitProfileButton");
+const submitCardButton = document.querySelector("#addCardForm");
+const nameInput = document.querySelector("#name");
+const jobInput = document.querySelector("#occupation");
 
-let imagePopup = document.querySelector(".popup__pic");
-let cardsContainer = document.querySelector(".elements");
-let newCardTemplate = document.querySelector("#newCardTemplate").content;
+const imagePopup = document.querySelector(".popup__pic");
+const cardsContainer = document.querySelector(".elements");
+const newCardTemplate = document.querySelector("#newCardTemplate").content;
 
-let addCardButton = document.querySelector(".profile__add");
+const addCardButton = document.querySelector(".profile__add");
 
-let bigPicture = document.querySelector(".image-popup__picture");
-let bigPictureName = document.querySelector(".image-popup__name");
-let bigPictureClose = document.querySelector("#image-popup__close");
+const bigPicture = document.querySelector(".image-popup__picture");
+const bigPictureName = document.querySelector(".image-popup__name");
+const bigPictureClose = document.querySelector("#image-popup__close");
 
 const initialCards = [
   {
