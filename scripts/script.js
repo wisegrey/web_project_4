@@ -1,11 +1,14 @@
 // Let's find the form in the DOM
-let popupElement = document.querySelector(".popup");
+let popupEditElement = document.querySelector(".popup__edit");
+let popupAddElement = document.querySelector(".popup__add");
 let formElement = document.querySelector(".popup__form");
 let nameForPlaceholder = document.querySelector(".profile__name");
 let occupationForPlaceholder = document.querySelector(".profile__occupation");
 let editButton = document.querySelector("#profile__edit");
-let closeButton = popupElement.querySelector("#close");
-let submitButton = document.querySelector("#submitButton");
+let closeEditPopupButton = popupEditElement.querySelector("#close_edit_profile");
+let closeAddPopupButton = popupAddElement.querySelector("#close_add_card");
+let submitProfileButton = document.querySelector("#submitProfileButton");
+let submitCardButton = document.querySelector("#addCardForm");
 let nameInput = document.querySelector("#name");
 let jobInput = document.querySelector("#occupation");
 
@@ -65,12 +68,30 @@ function populateElements() {
 populateElements();
 
 // function from previous homework. To be deleted/refactored
-function toggleForm() {
-  if (!popupElement.classList.contains("popup_opened")) {
-    nameInput.value = nameForPlaceholder.textContent;
-    jobInput.value = occupationForPlaceholder.textContent;
-  }
-  popupElement.classList.toggle("popup_opened");
+// function toggleForm() {
+//   if (!popupEditElement.classList.contains("popup_opened")) {
+//     nameInput.value = nameForPlaceholder.textContent;
+//     jobInput.value = occupationForPlaceholder.textContent;
+//   }
+//   popupElement.classList.toggle("popup_opened");
+// }
+
+function openEditForm() {
+  nameInput.value = nameForPlaceholder.textContent;
+  jobInput.value = occupationForPlaceholder.textContent;
+  popupEditElement.classList.add("popup_opened");
+}
+
+function closeEditForm() {
+  popupEditElement.classList.remove("popup_opened");
+}
+
+function openAddForm() {
+  popupAddElement.classList.add("popup_opened");
+}
+
+function closeAddForm() {
+  popupAddElement.classList.remove("popup_opened");
 }
 
 // to take name/occupation from profile. To be refactored
@@ -78,14 +99,26 @@ function handleProfileFormSubmit(evt) {
   evt.preventDefault();
   nameForPlaceholder.textContent = nameInput.value;
   occupationForPlaceholder.textContent = jobInput.value;
-  toggleForm();
+  closeEditForm();
 }
+
+function handleCardSubmit(evt) {
+  evt.preventDefault();
+  const newName = document.querySelector("#title");
+  const newImage = document.querySelector("#imageUrl");
+  const newCard = createCard(newName.value, newImage.value);
+  cardsContainer.prepend(newCard);
+  closeAddForm();
+}
+
 
 // event listeners
 formElement.addEventListener('submit', handleProfileFormSubmit);
-editButton.addEventListener('click', toggleForm);
-closeButton.addEventListener('click', toggleForm);
-addCardButton.addEventListener('click', );
+editButton.addEventListener('click', openEditForm);
+closeEditPopupButton.addEventListener('click', closeEditForm);
+closeAddPopupButton.addEventListener('click', closeAddForm);
+addCardButton.addEventListener('click', openAddForm);
+submitCardButton.addEventListener('submit', handleCardSubmit);
 
 
 
