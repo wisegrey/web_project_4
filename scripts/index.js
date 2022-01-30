@@ -11,17 +11,18 @@ const submitProfileButton = document.querySelector("#submitProfileButton");
 const submitCardButton = document.querySelector("#addCardForm");
 const nameInput = document.querySelector("#name");
 const jobInput = document.querySelector("#occupation");
-
 const imagePopup = document.querySelector("#popup__pic");
 const cardsContainer = document.querySelector(".elements");
 const newCardTemplate = document.querySelector("#newCardTemplate").content;
-
 const addCardButton = document.querySelector(".profile__add");
+const bigPicture = document.querySelector(".popup__image-picture");
+const bigPictureName = document.querySelector(".popup__image-name");
+const bigPictureClose = document.querySelector("#popup__image-close");
+const newName = document.querySelector("#title");
+const newImage = document.querySelector("#imageUrl");
 
-const bigPicture = document.querySelector(".image-popup__picture");
-const bigPictureName = document.querySelector(".image-popup__name");
-const bigPictureClose = document.querySelector("#image-popup__close");
-
+// I tried to put it in a separate file, but my browser gives an error about CORS policy
+// So let it be here for some time...
 const initialCards = [
   {
     name: "Yosemite Valley",
@@ -47,7 +48,7 @@ const initialCards = [
     name: "Lago di Braies",
     link: "https://code.s3.yandex.net/web-code/lago.jpg"
   }
-]; 
+];
 
 // create single card
 function createCard(name, image) {
@@ -59,7 +60,7 @@ function createCard(name, image) {
   cardName.textContent = name;
   cardImage.src = image;
   cardImage.alt = name;
-  cardImage.addEventListener("click", fullScreenPic);
+  cardImage.addEventListener("click", openFullScreenPic);
   likeBtn.addEventListener("click", handleLikeButton);
   deleteBtn.addEventListener("click", handleDeleteButton);
   return newCard;
@@ -74,50 +75,63 @@ function populateElements() {
 }
 populateElements();
 
-// function from previous homework. To be deleted/refactored
-// function toggleForm() {
-//   if (!popupEditElement.classList.contains("popup_opened")) {
-//     nameInput.value = nameForPlaceholder.textContent;
-//     jobInput.value = occupationForPlaceholder.textContent;
-//   }
-//   popupElement.classList.toggle("popup_opened");
-// }
+// universal functions to open and close popups respectively
+function openPopup(popupName){
+  popupName.classList.add("popup_opened");
+}
 
-// next 4 functions names speaks for iselfs =)
-function openEditForm() {
+function closePopup(popupName){
+  popupName.classList.remove("popup_opened");
+}
+
+// popup handlers
+function handleOpenEditForm() {
   nameInput.value = nameForPlaceholder.textContent;
   jobInput.value = occupationForPlaceholder.textContent;
-  popupEditElement.classList.add("popup_opened");
+  openPopup(popupEditElement);
 }
 
-function closeEditForm() {
-  popupEditElement.classList.remove("popup_opened");
+function handleOpenAddForm() {
+  openPopup(popupAddElement);
 }
 
-function openAddForm() {
-  popupAddElement.classList.add("popup_opened");
+function handleCloseEditPopup(){
+  closePopup(popupEditElement);
 }
 
-function closeAddForm() {
-  popupAddElement.classList.remove("popup_opened");
+function handleCloseAddPopup(){
+  closePopup(popupAddElement);
 }
 
-// to take name/occupation from profile. To be refactored
+//makes picture popup visible and gives URL for pic and text for description under the pic.
+function openFullScreenPic(evt) {
+  const imageURL = evt.target.currentSrc;
+  const imageTitle = evt.target.alt;
+  bigPicture.src = imageURL;
+  bigPicture.alt = imageTitle;
+  bigPictureName.textContent = imageTitle;
+  openPopup(imagePopup);
+}
+
+// close/makes invisible picture popup
+function handleCloseFullScreenPic(){
+  closePopup(imagePopup);
+}
+
+// takes inputs and adds them to profile in corresponding fields
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
   nameForPlaceholder.textContent = nameInput.value;
   occupationForPlaceholder.textContent = jobInput.value;
-  closeEditForm();
+  closePopup(popupEditElement);
 }
 
 // function to add a single card from inputs in Add "new place"
 function handleCardSubmit(evt) {
   evt.preventDefault();
-  const newName = document.querySelector("#title");
-  const newImage = document.querySelector("#imageUrl");
   const newCard = createCard(newName.value, newImage.value);
   cardsContainer.prepend(newCard);
-  closeAddForm();
+  closePopup(popupAddElement);
 }
 
 // to make like-heart icon chamge color after click =)
@@ -130,26 +144,12 @@ function handleDeleteButton(evt) {
   evt.target.closest(".element").remove();
 }
 
-//makes picture popup visible and gives URL for pic and text for description under the pic.
-function fullScreenPic(evt) {
-  const imageURL = evt.target.currentSrc;
-  const imageTitle = evt.target.alt;
-  bigPicture.src = imageURL;
-  bigPicture.alt = imageTitle;
-  bigPictureName.textContent = imageTitle;
-  imagePopup.classList.add("popup_opened");
-}
-
-// close/makes inviseble picture popup
-function closeFullScreenPic(){
-  imagePopup.classList.remove("popup_opened");
-}
 
 // event listeners
 formElement.addEventListener('submit', handleProfileFormSubmit);
-editButton.addEventListener('click', openEditForm);
-closeEditPopupButton.addEventListener('click', closeEditForm);
-closeAddPopupButton.addEventListener('click', closeAddForm);
-addCardButton.addEventListener('click', openAddForm);
+editButton.addEventListener('click', handleOpenEditForm);
+closeEditPopupButton.addEventListener('click', handleCloseEditPopup);
+closeAddPopupButton.addEventListener('click', handleCloseAddPopup);
+addCardButton.addEventListener('click', handleOpenAddForm);
 submitCardButton.addEventListener('submit', handleCardSubmit);
-bigPictureClose.addEventListener('click', closeFullScreenPic);
+bigPictureClose.addEventListener('click', handleCloseFullScreenPic);

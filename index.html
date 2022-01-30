@@ -10,11 +10,43 @@
 </head>
 
 <body class="content">
+    <header class="header">
+        <img class="header__logo" src="./img/logo.svg" alt="logo">
+    </header>
+
+    <main class="main">
+        <section class="profile">
+            <img class="profile__avatar" src="./img/kusto.jpg" alt="Your foto, username">
+            <h1 class="profile__name">Jacques Cousteau</h1>
+            <button type="button" class="profile__edit" id="profile__edit"></button>
+            <p class="profile__occupation">Explorer</p>
+            <button type="button" class="profile__add"></button>
+        </section>
+
+        <section class="elements"></section>
+
+
+    </main>
+
+    <footer class="footer">
+        <p class="footer__paragraph">© 2021 Around The U.S.</p>
+    </footer>
+    <template id="newCardTemplate">
+        <div class="element">
+            <button type="button" class="element__delete"></button>
+            <img class="element__image" src=" " alt=" " />
+            <div class="element__textarea">
+                <h2 class="element__name"></h2>
+                <button type="button" class="element__like"></button>
+            </div>
+        </div>
+    </template>
+
     <div class="popup" id="popup__pic">
-        <div class="image-popup">
-            <img class="image-popup__picture" src=" " alt=" ">
-            <p class="image-popup__name"></p>
-            <button type="button" id="image-popup__close" class="popup__close"></button>
+        <div class="popup__image">
+            <img class="popup__image-picture" src=" " alt=" ">
+            <p class="popup__image-name"></p>
+            <button type="button" id="popup__image-close" class="popup__close"></button>
         </div>
     </div>
 
@@ -47,38 +79,7 @@
         </div>
     </div>
 
-    <header class="header">
-        <img class="header__logo" src="./img/logo.svg" alt="logo">
-    </header>
-
-    <main class="main">
-        <section class="profile">
-            <img class="profile__avatar" src="./img/kusto.jpg" alt="Your foto, username">
-            <h1 class="profile__name">Jacques Cousteau</h1>
-            <button type="button" class="profile__edit" id="profile__edit"></button>
-            <p class="profile__occupation">Explorer</p>
-            <button type="button" class="profile__add"></button>
-        </section>
-
-        <section class="elements"></section>
-
-
-    </main>
-
-    <footer class="footer">
-        <p class="footer__paragraph">© 2021 Around The U.S.</p>
-    </footer>
-    <template id="newCardTemplate">
-        <div class="element">
-            <button type="button" class="element__delete"></button>
-            <img class="element__image" src=" " alt=" " />
-            <div class="element__textarea">
-                <h2 class="element__name"></h2>
-                <button type="button" class="element__like"></button>
-            </div>
-        </div>
-    </template>
-    <script src="./scripts/script.js" defer></script>
+    <script src="./scripts/index.js" defer></script>
 
 </body>
 
