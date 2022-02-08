@@ -6,7 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="./pages/index.css">
-    <title>Project 5 Homework</title>
+    <!-- adding a favicon is not in the task, but I'm tired of seeing an error in the console =) -->
+    <link rel="shortcut icon" href="./img/favicon-32x32.png" type="image/png">
+    <title>Around the U.S.</title>
 </head>
 
 <body class="content">
@@ -55,10 +57,13 @@
             <button type="button" id="close_edit_profile" class="popup__close"></button>
             <div class="popup__form">
                 <h2 class="popup__title">Edit profile</h2>
-                <form name="form_profile" id="editProfileForm">
-                    <input class="popup__input" type="text" name="name" id="name" placeholder="name" />
-                    <input class="popup__input" type="text" name="occupation" id="occupation"
-                        placeholder="occupation" />
+                <form name="form_profile" id="editProfileForm" class="form" novalidate>
+                    <input class="popup__input" type="text" name="name" id="name" placeholder="name" required
+                        minlength="2" maxlength="40" />
+                    <span class="input-error name-error"></span>
+                    <input class="popup__input" type="text" name="occupation" id="occupation" placeholder="occupation"
+                        required minlength="2" maxlength="200" />
+                    <span class="input-error occupation-error"></span>
                     <button type="submit" id="submitProfileButton" class="popup__submit">Save</button>
                 </form>
             </div>
@@ -70,16 +75,21 @@
             <button type="button" id="close_add_card" class="popup__close"></button>
             <div class="popup__form">
                 <h2 class="popup__title">New place</h2>
-                <form name="form_place" id="addCardForm">
-                    <input class="popup__input" type="text" name="title" id="title" placeholder="Title" />
-                    <input class="popup__input" type="text" name="imageUrl" id="imageUrl" placeholder="Image URL" />
+                <form name="form_place" id="addCardForm" name="add_card" class="form" novalidate>
+                    <input class="popup__input" type="text" name="title" id="title" placeholder="Title" required
+                        minlength="1" maxlength="30" />
+                    <span class="input-error title-error"></span>
+                    <input class="popup__input" type="url" name="imageUrl" id="imageUrl" placeholder="Image URL"
+                        required />
+                    <span class="input-error imageUrl-error"></span>
                     <button type="submit" id="submitCardButton" class="popup__submit">Create</button>
                 </form>
             </div>
         </div>
     </div>
-
-    <script src="./scripts/index.js" defer></script>
+    <script type="module" src="./scripts/cards.js" defer></script>
+    <script type="module" src="./scripts/validate.js" defer></script>
+    <script type="module" src="./scripts/index.js" defer></script>
 
 </body>
 

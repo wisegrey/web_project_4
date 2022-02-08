@@ -1,3 +1,6 @@
+// import { reset, settings } from "./validate.js";
+import { initialCards } from "./cards.js";
+
 // Let's find the form in the DOM
 const popupEditElement = document.querySelector("#popup__edit");
 const popupAddElement = document.querySelector("#popup__add");
@@ -7,7 +10,7 @@ const occupationForPlaceholder = document.querySelector(".profile__occupation");
 const editButton = document.querySelector("#profile__edit");
 const closeEditPopupButton = popupEditElement.querySelector("#close_edit_profile");
 const closeAddPopupButton = popupAddElement.querySelector("#close_add_card");
-const submitProfileButton = document.querySelector("#submitProfileButton");
+// const submitProfileButton = document.querySelector("#submitProfileButton");
 const submitCardButton = document.querySelector("#addCardForm");
 const nameInput = document.querySelector("#name");
 const jobInput = document.querySelector("#occupation");
@@ -20,35 +23,8 @@ const bigPictureName = document.querySelector(".popup__image-name");
 const bigPictureClose = document.querySelector("#popup__image-close");
 const newName = document.querySelector("#title");
 const newImage = document.querySelector("#imageUrl");
+const popups = document.querySelectorAll(".popup");
 
-// I tried to put it in a separate file, but my browser gives an error about CORS policy
-// So let it be here for some time...
-const initialCards = [
-  {
-    name: "Yosemite Valley",
-    link: "https://code.s3.yandex.net/web-code/yosemite.jpg"
-  },
-  {
-    name: "Lake Louise",
-    link: "https://code.s3.yandex.net/web-code/lake-louise.jpg"
-  },
-  {
-    name: "Bald Mountains",
-    link: "https://code.s3.yandex.net/web-code/bald-mountains.jpg"
-  },
-  {
-    name: "Latemar",
-    link: "https://code.s3.yandex.net/web-code/latemar.jpg"
-  },
-  {
-    name: "Vanoise National Park",
-    link: "https://code.s3.yandex.net/web-code/vanoise.jpg"
-  },
-  {
-    name: "Lago di Braies",
-    link: "https://code.s3.yandex.net/web-code/lago.jpg"
-  }
-];
 
 // create single card
 function createCard(name, image) {
@@ -78,10 +54,13 @@ populateElements();
 // universal functions to open and close popups respectively
 function openPopup(popupName){
   popupName.classList.add("popup_opened");
+  document.addEventListener("keydown", handleEscPress);
 }
 
 function closePopup(popupName){
   popupName.classList.remove("popup_opened");
+  document.removeEventListener("keydown", handleEscPress);
+  // popupName.removeEventListener("click", handleOverlayClick);
 }
 
 // popup handlers
@@ -144,6 +123,17 @@ function handleDeleteButton(evt) {
   evt.target.closest(".element").remove();
 }
 
+// close popup after we press Escape button
+function handleEscPress(evt) {
+  if(evt.code === "Escape") {
+    closePopup(document.querySelector(".popup_opened"));
+  }
+}
+
+// close popup after mouseclicking everywhere on page, except form
+function handleOverlayClick(evt) {
+  closePopup(evt.target);
+}
 
 // event listeners
 formElement.addEventListener('submit', handleProfileFormSubmit);
@@ -153,3 +143,6 @@ closeAddPopupButton.addEventListener('click', handleCloseAddPopup);
 addCardButton.addEventListener('click', handleOpenAddForm);
 submitCardButton.addEventListener('submit', handleCardSubmit);
 bigPictureClose.addEventListener('click', handleCloseFullScreenPic);
+popups.forEach((popup) => {
+  popup.addEventListener("click", handleOverlayClick);
+});
