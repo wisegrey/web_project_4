@@ -2,6 +2,14 @@
 
 // }
 // well, reset i will make later =)
+export const settings = {
+    formSelector: ".form",
+    inputSelector: ".popup__input",
+    submitButtonSelector: ".popup__submit",
+    inactiveButtonClass: "popup__submit_disabled",
+    inputErrorClass: "popup__input-error",
+    errorClass: "input-error_visible"
+};
 
 const showInputError = (input, formElement, {inputErrorClass, errorClass}) => {
     const errorElement = formElement.querySelector(`.${input.id}-error`);
@@ -31,11 +39,15 @@ const hasInvalidInput = (inputList) => {
     });
 };
 
+export const disableButton = (buttonElement, inactiveButtonClass) => {
+    buttonElement.classList.add(inactiveButtonClass);
+    buttonElement.disabled = true;
+};
+
 const toggleButtonState = (inputList, buttonElement, { inactiveButtonClass }) => {
 
     if (hasInvalidInput(inputList)) {
-        buttonElement.classList.add(inactiveButtonClass);
-        buttonElement.disabled = true;
+        disableButton(buttonElement, inactiveButtonClass);
     } else {
         buttonElement.classList.remove(inactiveButtonClass);
         buttonElement.disabled = false;
@@ -63,11 +75,4 @@ const enableValidation = (settings) => {
 };
 
 
-enableValidation({
-    formSelector: ".form",
-    inputSelector: ".popup__input",
-    submitButtonSelector: ".popup__submit",
-    inactiveButtonClass: "popup__submit_disabled",
-    inputErrorClass: "popup__input-error",
-    errorClass: "input-error_visible"
-  });
+enableValidation(settings);

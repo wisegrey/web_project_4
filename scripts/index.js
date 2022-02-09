@@ -1,5 +1,5 @@
-// import { reset, settings } from "./validate.js";
 import { initialCards } from "./cards.js";
+import { disableButton, settings } from "./validate.js";
 
 // Let's find the form in the DOM
 const popupEditElement = document.querySelector("#popup__edit");
@@ -10,7 +10,6 @@ const occupationForPlaceholder = document.querySelector(".profile__occupation");
 const editButton = document.querySelector("#profile__edit");
 const closeEditPopupButton = popupEditElement.querySelector("#close_edit_profile");
 const closeAddPopupButton = popupAddElement.querySelector("#close_add_card");
-// const submitProfileButton = document.querySelector("#submitProfileButton");
 const submitCardButton = document.querySelector("#addCardForm");
 const nameInput = document.querySelector("#name");
 const jobInput = document.querySelector("#occupation");
@@ -24,6 +23,7 @@ const bigPictureClose = document.querySelector("#popup__image-close");
 const newName = document.querySelector("#title");
 const newImage = document.querySelector("#imageUrl");
 const popups = document.querySelectorAll(".popup");
+const cardCreateButton = document.querySelector("#submitCardButton");
 
 
 // create single card
@@ -46,7 +46,6 @@ function createCard(name, image) {
 function populateElements() {
   initialCards.forEach(card => {
     cardsContainer.append(createCard(card.name, card.link));
-    // console.log(card.name, card.link);
   });
 }
 populateElements();
@@ -60,7 +59,6 @@ function openPopup(popupName){
 function closePopup(popupName){
   popupName.classList.remove("popup_opened");
   document.removeEventListener("keydown", handleEscPress);
-  // popupName.removeEventListener("click", handleOverlayClick);
 }
 
 // popup handlers
@@ -110,6 +108,8 @@ function handleCardSubmit(evt) {
   evt.preventDefault();
   const newCard = createCard(newName.value, newImage.value);
   cardsContainer.prepend(newCard);
+  popupAddElement.querySelector(".form").reset();
+  disableButton(cardCreateButton, settings.inactiveButtonClass);
   closePopup(popupAddElement);
 }
 
@@ -144,5 +144,5 @@ addCardButton.addEventListener('click', handleOpenAddForm);
 submitCardButton.addEventListener('submit', handleCardSubmit);
 bigPictureClose.addEventListener('click', handleCloseFullScreenPic);
 popups.forEach((popup) => {
-  popup.addEventListener("click", handleOverlayClick);
+  popup.addEventListener("mousedown", handleOverlayClick);
 });
