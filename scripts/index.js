@@ -1,6 +1,7 @@
 import { initialCards } from "./cards.js";
 import { disableButton, settings } from "./validate.js";
 import { openPopup, closePopup } from "./utils.js";
+import Card from "./Card.js";
 
 // Let's find the form in the DOM
 const popupEditElement = document.querySelector("#popup__edit");
@@ -32,21 +33,21 @@ function createCard(name, image) {
   const newCard = newCardTemplate.querySelector(".element").cloneNode(true);
   const cardName = newCard.querySelector(".element__name");
   const cardImage = newCard.querySelector(".element__image");
-  const likeBtn = newCard.querySelector(".element__like");
-  const deleteBtn = newCard.querySelector(".element__delete");
+  const likeButton = newCard.querySelector(".element__like");
+  const deleteButton = newCard.querySelector(".element__delete");
   cardName.textContent = name;
   cardImage.src = image;
   cardImage.alt = name;
   cardImage.addEventListener("click", openFullScreenPic);
-  likeBtn.addEventListener("click", handleLikeButton);
-  deleteBtn.addEventListener("click", handleDeleteButton);
+  likeButton.addEventListener("click", handleLikeButton);
+  deleteButton.addEventListener("click", handleDeleteButton);
   return newCard;
 }
 
 // create initial cards
 function populateElements() {
   initialCards.forEach(card => {
-    cardsContainer.append(createCard(card.name, card.link));
+    cardsContainer.append(new Card(card, "#newCardTemplate").createCard());
   });
 }
 populateElements();
