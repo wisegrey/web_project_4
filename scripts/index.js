@@ -1,7 +1,19 @@
-import { initialCards } from "./cards.js";
-import { disableButton, settings } from "./validate.js";
-import { openPopup, closePopup } from "./utils.js";
 import Card from "./Card.js";
+import FormValidator from "./FormValidator.js";
+import { initialCards } from "./cards.js";
+// import { disableButton } from "./validate.js";
+import { openPopup, closePopup } from "./utils.js";
+
+
+// settings for Validator
+const settings = {
+  formSelector: ".form",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__submit",
+  inactiveButtonClass: "popup__submit_disabled",
+  inputErrorClass: "popup__input-error",
+  errorClass: "input-error_visible"
+};
 
 // Let's find the form in the DOM
 const popupEditElement = document.querySelector("#popup__edit");
@@ -17,32 +29,13 @@ const nameInput = document.querySelector("#name");
 const jobInput = document.querySelector("#occupation");
 const imagePopup = document.querySelector("#popup__pic");
 const cardsContainer = document.querySelector(".elements");
-const newCardTemplate = document.querySelector("#newCardTemplate").content;
 const addCardButton = document.querySelector(".profile__add");
-const bigPicture = document.querySelector(".popup__image-picture");
-const bigPictureName = document.querySelector(".popup__image-name");
 const bigPictureClose = document.querySelector("#popup__image-close");
 const newName = document.querySelector("#title");
 const newImage = document.querySelector("#imageUrl");
 const popups = document.querySelectorAll(".popup");
 const cardCreateButton = document.querySelector("#submitCardButton");
 
-
-// create single card
-function createCard(name, image) {
-  const newCard = newCardTemplate.querySelector(".element").cloneNode(true);
-  const cardName = newCard.querySelector(".element__name");
-  const cardImage = newCard.querySelector(".element__image");
-  const likeButton = newCard.querySelector(".element__like");
-  const deleteButton = newCard.querySelector(".element__delete");
-  cardName.textContent = name;
-  cardImage.src = image;
-  cardImage.alt = name;
-  cardImage.addEventListener("click", openFullScreenPic);
-  likeButton.addEventListener("click", handleLikeButton);
-  deleteButton.addEventListener("click", handleDeleteButton);
-  return newCard;
-}
 
 // create initial cards
 function populateElements() {
@@ -52,6 +45,13 @@ function populateElements() {
 }
 populateElements();
 
+//all for validators
+const editForm = document.querySelector("#editProfileForm");
+const addForm = document.querySelector("#addCardForm");
+export const editFormValidator = new FormValidator(settings, editForm);
+export const addFormValidator = new FormValidator(settings, addForm);
+editFormValidator.enableValidation();
+addFormValidator.enableValidation();
 
 // popup handlers
 function handleOpenEditForm() {
@@ -72,16 +72,6 @@ function handleCloseAddPopup(){
   closePopup(popupAddElement);
 }
 
-//makes picture popup visible and gives URL for pic and text for description under the pic.
-function openFullScreenPic(evt) {
-  const imageURL = evt.target.currentSrc;
-  const imageTitle = evt.target.alt;
-  bigPicture.src = imageURL;
-  bigPicture.alt = imageTitle;
-  bigPictureName.textContent = imageTitle;
-  openPopup(imagePopup);
-}
-
 // close/makes invisible picture popup
 function handleCloseFullScreenPic(){
   closePopup(imagePopup);
@@ -95,26 +85,22 @@ function handleProfileFormSubmit(evt) {
   closePopup(popupEditElement);
 }
 
+// little helper. shuts down submit key after we create new card
+const disableButton = (buttonElement, inactiveButtonClass) => {
+  buttonElement.classList.add(inactiveButtonClass);
+  buttonElement.disabled = true;
+};
+
 // function to add a single card from inputs in Add "new place"
 function handleCardSubmit(evt) {
   evt.preventDefault();
-  const newCard = createCard(newName.value, newImage.value);
-  cardsContainer.prepend(newCard);
+  const newCardData = { name: newName.value, link: newImage.value};
+  const card = new Card(newCardData, "#newCardTemplate").createCard();
+  cardsContainer.prepend(card);
   popupAddElement.querySelector(".form").reset();
   disableButton(cardCreateButton, settings.inactiveButtonClass);
   closePopup(popupAddElement);
 }
-
-// to make like-heart icon chamge color after click =)
-function handleLikeButton(evt) {
-  evt.target.classList.toggle("element__like-active");
-}
-
-//obliviously this thing delete card
-function handleDeleteButton(evt) {
-  evt.target.closest(".element").remove();
-}
-
 
 // close popup after mouseclicking everywhere on page, except form
 function handleOverlayClick(evt) {
