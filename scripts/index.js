@@ -1,5 +1,6 @@
 import { initialCards } from "./cards.js";
 import { disableButton, settings } from "./validate.js";
+import { openPopup, closePopup } from "./utils.js";
 
 // Let's find the form in the DOM
 const popupEditElement = document.querySelector("#popup__edit");
@@ -50,16 +51,6 @@ function populateElements() {
 }
 populateElements();
 
-// universal functions to open and close popups respectively
-function openPopup(popupName){
-  popupName.classList.add("popup_opened");
-  document.addEventListener("keydown", handleEscPress);
-}
-
-function closePopup(popupName){
-  popupName.classList.remove("popup_opened");
-  document.removeEventListener("keydown", handleEscPress);
-}
 
 // popup handlers
 function handleOpenEditForm() {
@@ -123,12 +114,6 @@ function handleDeleteButton(evt) {
   evt.target.closest(".element").remove();
 }
 
-// close popup after we press Escape button
-function handleEscPress(evt) {
-  if(evt.code === "Escape") {
-    closePopup(document.querySelector(".popup_opened"));
-  }
-}
 
 // close popup after mouseclicking everywhere on page, except form
 function handleOverlayClick(evt) {
