@@ -1,9 +1,7 @@
 import Card from "./Card.js";
 import FormValidator from "./FormValidator.js";
 import { initialCards } from "./cards.js";
-// import { disableButton } from "./validate.js";
 import { openPopup, closePopup } from "./utils.js";
-
 
 // settings for Validator
 const settings = {
