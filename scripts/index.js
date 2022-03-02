@@ -46,8 +46,8 @@ populateElements();
 //all for validators
 const editForm = document.querySelector("#editProfileForm");
 const addForm = document.querySelector("#addCardForm");
-export const editFormValidator = new FormValidator(settings, editForm);
-export const addFormValidator = new FormValidator(settings, addForm);
+const editFormValidator = new FormValidator(settings, editForm);
+const addFormValidator = new FormValidator(settings, addForm);
 editFormValidator.enableValidation();
 addFormValidator.enableValidation();
 
@@ -83,12 +83,6 @@ function handleProfileFormSubmit(evt) {
   closePopup(popupEditElement);
 }
 
-// little helper. shuts down submit key after we create new card
-const disableButton = (buttonElement, inactiveButtonClass) => {
-  buttonElement.classList.add(inactiveButtonClass);
-  buttonElement.disabled = true;
-};
-
 // function to add a single card from inputs in Add "new place"
 function handleCardSubmit(evt) {
   evt.preventDefault();
@@ -96,7 +90,7 @@ function handleCardSubmit(evt) {
   const card = new Card(newCardData, "#newCardTemplate").createCard();
   cardsContainer.prepend(card);
   popupAddElement.querySelector(".form").reset();
-  disableButton(cardCreateButton, settings.inactiveButtonClass);
+  addFormValidator.reset();
   closePopup(popupAddElement);
 }
 
